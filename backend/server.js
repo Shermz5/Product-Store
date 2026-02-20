@@ -12,7 +12,7 @@ app.use(express.json())
 app.post("/api/products", async (req,res) => {
     const product = req.body
 
-    if(!product.name || !product.price || product.image) {
+    if(!product.name || !product.price || !product.image) {
         return res.status(400).json({success:false, message: "Please provide all fields"})
     }
 
@@ -25,6 +25,10 @@ app.post("/api/products", async (req,res) => {
         console.error("Error in create product: ", error.message)
         res.status(500).json({success: false, message: "Server Error"})
     }
+})
+
+app.delete("/products", async (req,res) => {
+    const product = req.body
 })
 
 app.listen(5000, () => {
